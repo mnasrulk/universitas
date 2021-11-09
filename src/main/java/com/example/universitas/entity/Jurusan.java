@@ -32,5 +32,17 @@ public class Jurusan implements Serializable {
     @ManyToOne
     private Fakultas fakultas;
 
+    public Fakultas getFakultas() {
+        return fakultas;
+    }
 
+    public void setFakultas(Fakultas fakultas) {
+        this.fakultas = fakultas;
+    }
+
+    public Jurusan() {
+
+    }
+
+    
 }
