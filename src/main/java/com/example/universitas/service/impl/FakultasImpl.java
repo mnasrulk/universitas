@@ -4,6 +4,7 @@ import com.example.universitas.dto.FakultasModel;
 import com.example.universitas.entity.Fakultas;
 import com.example.universitas.repository.FakultasRepository;
 import com.example.universitas.service.FakultasService;
+import com.example.universitas.util.ModelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +56,58 @@ public class FakultasImpl implements FakultasService {
             map.put("statusMessage", "Berhasil menampilkan semua list fakultas");
             return map;
         } catch (Exception e) {
+            e.printStackTrace();
+            map.put("statusCode", "500");
+            map.put("statusMessage", e);
+            return map;
+        }
+    }
+
+    @Override
+    public Map getById(String id) {
+        Map map = new HashMap();
+        try {
+            Fakultas fakultas = fakultasRepository.getById(id);
+            if (fakultas == null){
+                map.put("statusCode", "404");
+                map.put("statusMessage", "Data fakultas tidak ada");
+                return map;
+            }
+
+            map.put("data", fakultas);
+            map.put("statusCode", "200");
+            map.put("statusMessage", "Data item detail");
+            return map;
+        }catch (Exception e) {
+            e.printStackTrace();
+            map.put("statusCode", "500");
+            map.put("statusMessage", e);
+            return map;
+        }
+    }
+
+    @Override
+    public Map update(FakultasModel fakultasModel) {
+        Map map = new HashMap();
+        try {
+            Fakultas fakultasExist = fakultasRepository.getById(fakultasModel.getId());
+
+            if (fakultasExist == null){
+                map.put("statusCode", "404");
+                map.put("statusMessage", "Data fakultas tidak ada");
+                return map;
+            }
+
+            fakultasExist.setNamaFakultas(fakultasModel.getNamaFakultas());
+            fakultasExist.setKodeFakultas(fakultasModel.getKodeFakultas());
+
+            FakultasModel fakultasModelUpdate = ModelConverter.toFakultasModel(fakultasRepository.save(fakultasExist));
+
+            map.put("data", fakultasModelUpdate);
+            map.put("statusCode", "200");
+            map.put("statusMessage", "Berhasil update data fakultas");
+            return map;
+        }  catch (Exception e) {
             e.printStackTrace();
             map.put("statusCode", "500");
             map.put("statusMessage", e);

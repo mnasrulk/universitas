@@ -35,4 +35,21 @@ public class FakultasController {
         map.put("Response = ", fakultasBaru);
         return new ResponseEntity<Map>(fakultasBaru, HttpStatus.OK);
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<Map> update(@Valid @RequestBody FakultasModel fakultasModel){
+        Map map = new HashMap();
+        Map updateFakultas = fakultasService.update(fakultasModel);
+
+        map.put("Request = ", fakultasModel);
+        map.put("Response = ", updateFakultas);
+        return new ResponseEntity<Map>(updateFakultas, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Map> getById(@PathVariable(value = "id") String id){
+        Map detailId = fakultasService.getById(id);
+
+        return new ResponseEntity<Map>(detailId, HttpStatus.OK);
+    }
 }
