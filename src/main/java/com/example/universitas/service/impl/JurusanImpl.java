@@ -2,7 +2,9 @@ package com.example.universitas.service.impl;
 
 
 import com.example.universitas.dto.JurusanModel;
+import com.example.universitas.entity.Fakultas;
 import com.example.universitas.entity.Jurusan;
+import com.example.universitas.repository.FakultasRepository;
 import com.example.universitas.repository.JurusanRepository;
 import com.example.universitas.service.JurusanService;
 import com.example.universitas.util.ModelConverter;
@@ -23,14 +25,20 @@ public class JurusanImpl implements JurusanService {
     @Autowired
     public JurusanRepository jurusanRepository;
 
+    @Autowired
+    public FakultasRepository fakultasRepository;
+
     @Override
     public Map insert(JurusanModel jurusanModel) {
         Map map = new HashMap();
         try {
+            Fakultas fakultas = fakultasRepository.getById(jurusanModel.getFakultasId());
+
             Jurusan jurusan = new Jurusan();
             jurusan.setId(jurusanModel.getId());
             jurusan.setNamaJurusan(jurusanModel.getNamaJurusan());
             jurusan.setKodeJurusan(jurusanModel.getKodeJurusan());
+            jurusan.setFakultas(fakultas);
             jurusanRepository.save(jurusan);
 
             map.put("data", jurusan);
@@ -99,8 +107,10 @@ public class JurusanImpl implements JurusanService {
                 return map;
             }
 
+
             jurusanExist.setNamaJurusan(jurusanModel.getNamaJurusan());
             jurusanExist.setKodeJurusan(jurusanModel.getKodeJurusan());
+            jurusanExist.setFakultas(jurusanModel.getFakultasId());
 
             JurusanModel jurusanModelUpdate = ModelConverter.toJurusanModel(jurusanRepository.save(jurusanExist));
 
@@ -114,5 +124,10 @@ public class JurusanImpl implements JurusanService {
             map.put("statusMessage", e);
             return map;
         }
+    }
+
+    @Override
+    public Map getCountByFakultas(String namaJurusan) {
+        return (Map) jurusanRepository.getCountByFakultas(namaJurusan);
     }
 }
