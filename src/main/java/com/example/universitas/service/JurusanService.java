@@ -10,4 +10,8 @@ public interface JurusanService {
     public Map insert(JurusanModel jurusanModel);
 
     public Map getAll();
+
+    public Map getById(String id);
+
+    public Map update(JurusanModel jurusanModel);
 }
