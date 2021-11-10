@@ -29,20 +29,14 @@ public class Jurusan implements Serializable {
     @Column(name = "kode_jurusan", nullable = false, unique = true)
     private String kodeJurusan;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Fakultas.class, cascade = CascadeType.ALL)
+    @JoinColumn (name = "fakultas_id")
     private Fakultas fakultas;
 
     public Fakultas getFakultas() {
         return fakultas;
     }
 
-    public void setFakultas(Fakultas fakultas) {
-        this.fakultas = fakultas;
-    }
-
-    public Jurusan() {
-
-    }
 
     
 }
