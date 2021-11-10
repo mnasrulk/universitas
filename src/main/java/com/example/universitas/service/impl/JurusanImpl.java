@@ -133,7 +133,7 @@ public class JurusanImpl implements JurusanService {
     }
 
     @Override
-    public Map getCountJurusanByFakultas(String fakultas_id) {
+    public Map getCountJurusanByFakultasId(String fakultas_id) {
         Map map = new HashMap();
         try {
             Jurusan jurusan = jurusanRepository.getCountJurusanByFakultasId(fakultas_id);

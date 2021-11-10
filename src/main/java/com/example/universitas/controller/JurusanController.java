@@ -54,9 +54,9 @@ public class JurusanController {
         return new ResponseEntity<Map>(detailId, HttpStatus.OK);
     }
 
-    @GetMapping("/count/jurusan")
-    public ResponseEntity<Map> getCountJurusanByFakultas(@PathVariable(value= "id") String id){
-        Map count = jurusanService.getCountJurusanByFakultas(id);
+    @GetMapping("/count")
+    public ResponseEntity<Map> getCountJurusanByFakultasId(@PathVariable(value= "id") String id){
+        Map count = jurusanService.getCountJurusanByFakultasId(id);
 
         return new ResponseEntity<Map>(count, HttpStatus.OK);
     }
