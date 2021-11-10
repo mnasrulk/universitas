@@ -107,11 +107,17 @@ public class JurusanImpl implements JurusanService {
                 return map;
             }
 
+            Fakultas fakultas = fakultasRepository.getById(jurusanModel.getFakultasId());
+
+            if (fakultas == null){
+                map.put("statusCode", "404");
+                map.put("statusMessage", "Data Fakultas tidak ada");
+                return map;
+            }
 
             jurusanExist.setNamaJurusan(jurusanModel.getNamaJurusan());
             jurusanExist.setKodeJurusan(jurusanModel.getKodeJurusan());
-            jurusanExist.setFakultas(jurusanModel.getFakultasId());
-
+            jurusanExist.setFakultas(fakultas);
             JurusanModel jurusanModelUpdate = ModelConverter.toJurusanModel(jurusanRepository.save(jurusanExist));
 
             map.put("data", jurusanModelUpdate);
@@ -127,7 +133,24 @@ public class JurusanImpl implements JurusanService {
     }
 
     @Override
-    public Map getCountByFakultas(String namaJurusan) {
-        return (Map) jurusanRepository.getCountByFakultas(namaJurusan);
+    public Map getCountJurusanByFakultas(String fakultas_id) {
+        Map map = new HashMap();
+        try {
+            Jurusan jurusan = jurusanRepository.getCountJurusanByFakultasId(fakultas_id);
+            if (jurusan == null) {
+                map.put("statusCode", "404");
+                map.put("statusMessage", "Data jurusan tidak ada");
+            }
+
+            map.put("data", jurusan);
+            map.put("statusCode", "200");
+            map.put("statusMessage", "Jumlah jurusan by fakultas_id: ");
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("statusCode", "404");
+            map.put("statusMessage", e);
+            return map;
+        }
     }
 }
