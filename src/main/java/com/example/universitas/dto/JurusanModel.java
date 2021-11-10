@@ -8,4 +8,5 @@ public class JurusanModel {
     String id;
     String NamaJurusan;
     String kodeJurusan;
+    String fakultasId;
 }

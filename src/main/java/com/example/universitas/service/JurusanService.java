@@ -14,4 +14,6 @@ public interface JurusanService {
     public Map getById(String id);
 
     public Map update(JurusanModel jurusanModel);
+
+    public Map getCountByFakultas(String namaJurusan);
 }

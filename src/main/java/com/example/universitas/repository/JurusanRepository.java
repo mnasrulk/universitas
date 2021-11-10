@@ -17,4 +17,7 @@ public interface JurusanRepository extends JpaRepository<Jurusan, Long> {
 
     @Query(value = "select * from Jurusan WHERE jurusan_id = :id", nativeQuery = true)
     public Jurusan getById(@Param("id") String id);
+
+    @Query(value = "select count(namaJurusan) from Jurusan WHERE fakultas_id= :id ", nativeQuery = true)
+    public Jurusan getCountByFakultas(@Param("namaJurusan") String fakultas_id);
 }
