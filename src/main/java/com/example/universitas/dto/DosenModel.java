@@ -1,12 +1,14 @@
 package com.example.universitas.dto;
 
+
 import lombok.Data;
 
 @Data
-public class JurusanModel {
+public class DosenModel {
 
     String id;
-    String NamaJurusan;
-    String kodeJurusan;
+    String NamaDosen;
+    String nip;
     String fakultasId;
+    String jurusanId;
 }

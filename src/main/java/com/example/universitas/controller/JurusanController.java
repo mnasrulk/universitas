@@ -36,4 +36,28 @@ public class JurusanController {
         map.put("Response = ", jurusanBaru);
         return new ResponseEntity<Map>(jurusanBaru, HttpStatus.OK);
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<Map> update(@Valid @RequestBody JurusanModel jurusanModel){
+        Map map = new HashMap();
+        Map updateJurusan = jurusanService.update(jurusanModel);
+
+        map.put("Request = ", jurusanModel);
+        map.put("Response = ", updateJurusan);
+        return new ResponseEntity<Map>(updateJurusan, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Map> getById(@PathVariable(value= "id") String id){
+        Map detailId = jurusanService.getById(id);
+
+        return new ResponseEntity<Map>(detailId, HttpStatus.OK);
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Map> getCountJurusanByFakultasId(@PathVariable(value= "id") String id){
+        Map count = jurusanService.getCountJurusanByFakultasId(id);
+
+        return new ResponseEntity<Map>(count, HttpStatus.OK);
+    }
 }
