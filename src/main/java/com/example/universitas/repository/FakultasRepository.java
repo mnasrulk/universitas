@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface FakultasRepository extends JpaRepository<Fakultas, Long> {
+public interface FakultasRepository extends JpaRepository<Fakultas, String> {
 
     @Query("select f from Fakultas f")
     public List<Fakultas> getAllFakultas();
