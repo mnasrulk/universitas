@@ -76,7 +76,7 @@ public class FakultasImpl implements FakultasService {
 
             map.put("data", fakultas);
             map.put("statusCode", "200");
-            map.put("statusMessage", "Data item detail");
+            map.put("statusMessage", "Data detail fakultas");
             return map;
         }catch (Exception e) {
             e.printStackTrace();

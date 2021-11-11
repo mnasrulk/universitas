@@ -2,6 +2,9 @@ package com.example.universitas.util;
 
 import com.example.universitas.dto.DosenModel;
 import com.example.universitas.dto.FakultasModel;
+import com.example.universitas.dto.MahasiswaModel;
+import com.example.universitas.entity.Fakultas;
+import com.example.universitas.entity.Mahasiswa;
 import com.example.universitas.dto.JurusanModel;
 import com.example.universitas.entity.Dosen;
 import com.example.universitas.entity.Fakultas;
@@ -19,6 +22,16 @@ public class ModelConverter {
         return fakultasModel;
     }
 
+    public static MahasiswaModel toMahasiswaModel(Mahasiswa mahasiswa){
+
+        MahasiswaModel mahasiswaModel = new MahasiswaModel();
+        mahasiswaModel.setId(mahasiswa.getId());
+        mahasiswaModel.setNamaMahasiswa(mahasiswa.getNamaMahasiswa());
+        mahasiswaModel.setNpm(mahasiswa.getNpm());
+        mahasiswaModel.setJurusanId(mahasiswa.getJurusan().getId());
+
+        return mahasiswaModel;
+      
     public static JurusanModel toJurusanModel(Jurusan jurusan){
         JurusanModel jurusanModel = new JurusanModel();
         jurusanModel.setId(jurusan.getId());
