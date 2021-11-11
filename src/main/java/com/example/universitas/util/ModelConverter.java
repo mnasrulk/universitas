@@ -1,7 +1,9 @@
 package com.example.universitas.util;
 
+import com.example.universitas.dto.DosenModel;
 import com.example.universitas.dto.FakultasModel;
 import com.example.universitas.dto.JurusanModel;
+import com.example.universitas.entity.Dosen;
 import com.example.universitas.entity.Fakultas;
 import com.example.universitas.entity.Jurusan;
 
@@ -24,5 +26,14 @@ public class ModelConverter {
         jurusanModel.setKodeJurusan(jurusan.getKodeJurusan());
 
         return jurusanModel;
+    }
+
+    public static DosenModel toDosenModel(Dosen dosen){
+        DosenModel dosenModel = new DosenModel();
+        dosenModel.setId(dosen.getId());
+        dosenModel.setNamaDosen(dosen.getNamaDosen());
+        dosenModel.setNip(dosen.getNip());
+
+        return dosenModel;
     }
 }
